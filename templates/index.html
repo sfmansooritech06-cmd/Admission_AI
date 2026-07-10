@@ -1,0 +1,413 @@
+{% extends "base.html" %}
+{% block title %}AdmitAI – College Admission AI Agent | IBM Powered{% endblock %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+{% endblock %}
+
+{% block body %}
+<!-- ══════════════════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════════════════ -->
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <a href="/" class="nav-logo">
+            <div class="logo-icon">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                    <circle cx="14" cy="14" r="13" stroke="#0f62fe" stroke-width="2"/>
+                    <path d="M8 18l4-8 3 5 2-3 3 6" stroke="#0f62fe" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <span class="logo-text">Admit<span class="logo-ai">AI</span></span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#features" class="nav-link">Features</a></li>
+            <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+            <li><a href="#colleges" class="nav-link">Colleges</a></li>
+            <li><a href="#stats" class="nav-link">Stats</a></li>
+        </ul>
+        <a href="/chat" class="nav-cta">
+            <span>Launch Chat</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 8h10M8 3l5 5-5 5"/></svg>
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════
+     HERO SECTION
+═══════════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+    <!-- Animated background blobs -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="grid-overlay"></div>
+
+    <div class="hero-container">
+        <div class="hero-badge">
+            <div class="badge-dot"></div>
+            <span>Powered by IBM Granite & watsonx.ai</span>
+        </div>
+        <h1 class="hero-title">
+            Your AI-Powered
+            <span class="gradient-text" id="typingText"></span>
+            Admission Guide
+        </h1>
+        <p class="hero-subtitle">
+            Ask anything about college admissions — fees, eligibility, scholarships, hostel,
+            seat matrix, and more. Get instant, accurate answers sourced directly from
+            official college documents using RAG technology.
+        </p>
+        <div class="hero-actions">
+            <a href="/chat" class="btn-primary">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2C5.58 2 2 5.58 2 10s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm1 11H9V9h2v4zm0-6H9V5h2v2z" fill="currentColor"/></svg>
+                Start Asking Now
+            </a>
+            <a href="#how-it-works" class="btn-secondary">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2"/><path d="M8 7l5 3-5 3V7z" fill="currentColor"/></svg>
+                How It Works
+            </a>
+        </div>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <span class="stat-number" data-target="21">0</span>
+                <span class="stat-label">Colleges</span>
+            </div>
+            <div class="hero-stat-divider"></div>
+            <div class="hero-stat">
+                <span class="stat-number" data-target="14">0</span>
+                <span class="stat-label">Topic Areas</span>
+            </div>
+            <div class="hero-stat-divider"></div>
+            <div class="hero-stat">
+                <span class="stat-number" data-target="100">0</span>
+                <span class="stat-label">% Source-Cited</span>
+            </div>
+            <div class="hero-stat-divider"></div>
+            <div class="hero-stat">
+                <span class="stat-number" data-target="0">0</span>
+                <span class="stat-label">Hallucinations</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating question cards -->
+    <div class="floating-cards">
+        <div class="float-card fc-1">
+            <div class="fc-icon">💰</div>
+            <span>What is the fee for CSE at MANIT?</span>
+        </div>
+        <div class="float-card fc-2">
+            <div class="fc-icon">🎓</div>
+            <span>IIT Indore vs MANIT comparison</span>
+        </div>
+        <div class="float-card fc-3">
+            <div class="fc-icon">🏠</div>
+            <span>Hostel fees at LNCT Bhopal?</span>
+        </div>
+        <div class="float-card fc-4">
+            <div class="fc-icon">📋</div>
+            <span>Documents required for admission?</span>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     FEATURES
+═══════════════════════════════════════════════════ -->
+<section class="features" id="features">
+    <div class="section-container">
+        <div class="section-header">
+            <span class="section-badge">Features</span>
+            <h2 class="section-title">Everything You Need to Know</h2>
+            <p class="section-subtitle">AdmitAI covers every aspect of college admissions from a single interface</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card" data-aos="fade-up">
+                <div class="feature-icon gradient-blue">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 4L4 9v10l10 5 10-5V9L14 4z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><path d="M4 9l10 5m0 0l10-5m-10 5v10" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg>
+                </div>
+                <h3>RAG-Powered Accuracy</h3>
+                <p>Retrieval-Augmented Generation ensures every answer comes directly from official college PDFs — zero hallucination.</p>
+            </div>
+
+            <div class="feature-card" data-aos="fade-up" data-delay="100">
+                <div class="feature-icon gradient-purple">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="4" width="20" height="20" rx="4" stroke="#fff" stroke-width="2"/><path d="M9 14h10M9 10h6M9 18h8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+                </div>
+                <h3>Source Citations</h3>
+                <p>Every response includes the exact college name, document name, and page number so you can verify information yourself.</p>
+            </div>
+
+            <div class="feature-card" data-aos="fade-up" data-delay="200">
+                <div class="feature-icon gradient-teal">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="10" r="5" stroke="#fff" stroke-width="2"/><path d="M6 24c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+                </div>
+                <h3>21+ Colleges</h3>
+                <p>Covers LNCT, MANIT, IIT Indore, BITS Pilani, VIT, and 16+ more top engineering & management colleges.</p>
+            </div>
+
+            <div class="feature-card" data-aos="fade-up" data-delay="300">
+                <div class="feature-icon gradient-cyan">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M5 14l5 5 13-13" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <h3>14 Topic Areas</h3>
+                <p>Admission process, fees, hostel, scholarships, eligibility, seat matrix, placements, and much more.</p>
+            </div>
+
+            <div class="feature-card" data-aos="fade-up" data-delay="400">
+                <div class="feature-icon gradient-blue">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="10" stroke="#fff" stroke-width="2"/><path d="M14 8v6l4 2" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+                </div>
+                <h3>Instant Responses</h3>
+                <p>FAISS vector search returns the most relevant document chunks in milliseconds for near real-time answers.</p>
+            </div>
+
+            <div class="feature-card" data-aos="fade-up" data-delay="500">
+                <div class="feature-icon gradient-purple">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 7h20M4 14h14M4 21h10" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+                </div>
+                <h3>IBM Granite LLM</h3>
+                <p>Leverages IBM's enterprise-grade Granite model through watsonx.ai for structured, professional answers.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     HOW IT WORKS (RAG Pipeline)
+═══════════════════════════════════════════════════ -->
+<section class="how-it-works" id="how-it-works">
+    <div class="section-container">
+        <div class="section-header">
+            <span class="section-badge">Architecture</span>
+            <h2 class="section-title">How RAG Works</h2>
+            <p class="section-subtitle">A 6-step pipeline from question to cited answer</p>
+        </div>
+
+        <div class="pipeline">
+            <div class="pipeline-step">
+                <div class="step-number">01</div>
+                <div class="step-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="#0f62fe" stroke-width="2"/><path d="M10 16h12M16 10l6 6-6 6" stroke="#0f62fe" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <h3>User Asks</h3>
+                <p>Student submits a natural language question about college admissions</p>
+            </div>
+            <div class="pipeline-arrow">→</div>
+
+            <div class="pipeline-step">
+                <div class="step-number">02</div>
+                <div class="step-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="6" stroke="#8a3ffc" stroke-width="2"/><circle cx="16" cy="16" r="5" stroke="#8a3ffc" stroke-width="2"/></svg>
+                </div>
+                <h3>Embed Query</h3>
+                <p>MiniLM-L6-v2 converts the question into a high-dimensional semantic vector</p>
+            </div>
+            <div class="pipeline-arrow">→</div>
+
+            <div class="pipeline-step">
+                <div class="step-number">03</div>
+                <div class="step-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="2" y="6" width="28" height="20" rx="4" stroke="#009d9a" stroke-width="2"/><path d="M8 12h16M8 16h10M8 20h12" stroke="#009d9a" stroke-width="2" stroke-linecap="round"/></svg>
+                </div>
+                <h3>FAISS Search</h3>
+                <p>Vector similarity search retrieves the top-K most relevant document chunks</p>
+            </div>
+            <div class="pipeline-arrow">→</div>
+
+            <div class="pipeline-step">
+                <div class="step-number">04</div>
+                <div class="step-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 4L4 10v12l12 6 12-6V10L16 4z" stroke="#1192e8" stroke-width="2" stroke-linejoin="round"/></svg>
+                </div>
+                <h3>Build Prompt</h3>
+                <p>Retrieved chunks + question are formatted into a strict RAG prompt</p>
+            </div>
+            <div class="pipeline-arrow">→</div>
+
+            <div class="pipeline-step">
+                <div class="step-number">05</div>
+                <div class="step-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="8" width="24" height="16" rx="4" stroke="#0f62fe" stroke-width="2"/><path d="M10 16h12M16 12v8" stroke="#0f62fe" stroke-width="2" stroke-linecap="round"/></svg>
+                </div>
+                <h3>IBM Granite</h3>
+                <p>watsonx.ai Granite LLM generates a precise, contextual answer</p>
+            </div>
+            <div class="pipeline-arrow">→</div>
+
+            <div class="pipeline-step">
+                <div class="step-number">06</div>
+                <div class="step-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M5 16l7 7 15-15" stroke="#009d9a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <h3>Cited Answer</h3>
+                <p>Answer displayed with college name, document name, and page number</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     TOPIC AREAS
+═══════════════════════════════════════════════════ -->
+<section class="topics" id="topics">
+    <div class="section-container">
+        <div class="section-header">
+            <span class="section-badge">Coverage</span>
+            <h2 class="section-title">What Can You Ask?</h2>
+            <p class="section-subtitle">AdmitAI has answers across all major admission topics</p>
+        </div>
+        <div class="topics-grid">
+            {% set topic_list = [
+                ("💰","Fee Structure","B.Tech, MBA, MCA, M.Tech tuition, development & other fees"),
+                ("🏠","Hostel Fees","Room rent, mess charges, facility deposits by semester"),
+                ("🎓","Scholarships","Merit, need-based, government & institutional scholarships"),
+                ("📋","Required Documents","Complete checklist for admission applications"),
+                ("✅","Eligibility Criteria","Academic qualifications, entrance exam scores, age limits"),
+                ("🗓️","Important Dates","Application, counselling, fee payment deadlines"),
+                ("📊","Seat Matrix","Total seats, category-wise allocation, supernumerary seats"),
+                ("🔄","Reservation Policy","SC/ST/OBC/EWS/PH quota details & carry-forward rules"),
+                ("📚","Course Details","Program structure, specialisations, duration, credits"),
+                ("🏆","Placement Info","Average & highest packages, top recruiters, placement %"),
+                ("📅","Academic Calendar","Semester dates, examinations, holidays schedule"),
+                ("🏛️","Admission Process","Step-by-step application and counselling guide"),
+                ("🏗️","Hostel Facilities","Amenities, security, internet, medical facility info"),
+                ("❓","FAQs","Frequently asked admission questions answered instantly"),
+            ] %}
+            {% for icon, title, desc in topic_list %}
+            <div class="topic-card">
+                <span class="topic-icon">{{ icon }}</span>
+                <div>
+                    <h4>{{ title }}</h4>
+                    <p>{{ desc }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SUPPORTED COLLEGES
+═══════════════════════════════════════════════════ -->
+<section class="colleges" id="colleges">
+    <div class="section-container">
+        <div class="section-header">
+            <span class="section-badge">Coverage</span>
+            <h2 class="section-title">Supported Colleges</h2>
+            <p class="section-subtitle">{{ colleges | length }}+ colleges with official document coverage</p>
+        </div>
+        <div class="colleges-grid">
+            {% for college in colleges %}
+            <div class="college-card">
+                <div class="college-abbr">{{ college.id[:3] }}</div>
+                <div class="college-info">
+                    <span class="college-name">{{ college.name }}</span>
+                    <span class="college-city">{{ college.city }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="colleges-cta">
+            <p>More colleges being added regularly</p>
+            <a href="/chat" class="btn-primary">Ask About Any College →</a>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     STATS
+═══════════════════════════════════════════════════ -->
+<section class="stats-section" id="stats">
+    <div class="section-container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value" data-target="21">0</div>
+                <div class="stat-label">Colleges Covered</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" data-target="14">0</div>
+                <div class="stat-label">Topic Categories</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value suffix-ms" data-target="200">0</div>
+                <div class="stat-label">Avg Response Time</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value suffix-pct" data-target="100">0</div>
+                <div class="stat-label">Source Accuracy</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     CTA SECTION
+═══════════════════════════════════════════════════ -->
+<section class="cta-section">
+    <div class="section-container">
+        <div class="cta-card">
+            <div class="cta-glow"></div>
+            <h2>Ready to Find Your Dream College?</h2>
+            <p>Get instant, accurate answers powered by IBM Granite AI and official college documents.</p>
+            <a href="/chat" class="btn-primary btn-large">
+                <span>Start Chatting Now</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"/></svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════ -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-brand">
+            <a href="/" class="nav-logo">
+                <div class="logo-icon">
+                    <svg width="24" height="24" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" stroke="#0f62fe" stroke-width="2"/><path d="M8 18l4-8 3 5 2-3 3 6" stroke="#0f62fe" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <span class="logo-text">Admit<span class="logo-ai">AI</span></span>
+            </a>
+            <p>AI-powered college admission assistant built for the IBM SkillsBuild AI & Cloud Hackathon.</p>
+        </div>
+        <div class="footer-links">
+            <div class="footer-col">
+                <h4>Product</h4>
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#colleges">Colleges</a>
+                <a href="/chat">Chat Interface</a>
+            </div>
+            <div class="footer-col">
+                <h4>Technology</h4>
+                <a href="#">IBM Granite LLM</a>
+                <a href="#">watsonx.ai</a>
+                <a href="#">LangChain RAG</a>
+                <a href="#">FAISS Vector DB</a>
+            </div>
+            <div class="footer-col">
+                <h4>Hackathon</h4>
+                <a href="#">IBM SkillsBuild</a>
+                <a href="#">AI & Cloud 2024</a>
+                <a href="#">Project Report</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2024 AdmitAI – IBM SkillsBuild AI & Cloud Hackathon</p>
+        <p>Powered by <strong>IBM Granite</strong> &amp; <strong>watsonx.ai</strong></p>
+    </div>
+</footer>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}

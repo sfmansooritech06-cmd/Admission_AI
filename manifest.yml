@@ -1,0 +1,8 @@
+applications:
+  - name: admitai
+    memory: 512M
+    instances: 1
+    buildpack: python_buildpack
+    command: gunicorn app:app --workers 2 --bind 0.0.0.0:$PORT
+    env:
+      FLASK_DEBUG: "False"

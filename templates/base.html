@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}AdmitAI – College Admission AI Agent{% endblock %}</title>
+
+    <!-- Favicon (inline SVG as data URI) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+    <!-- Base Styles -->
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --ibm-blue:       #0f62fe;
+            --ibm-blue-dark:  #0043ce;
+            --ibm-blue-light: #4589ff;
+            --ibm-purple:     #8a3ffc;
+            --ibm-teal:       #009d9a;
+            --ibm-cyan:       #1192e8;
+            --bg-primary:     #0a0a0f;
+            --bg-secondary:   #0d1117;
+            --bg-card:        rgba(255,255,255,0.04);
+            --bg-card-hover:  rgba(255,255,255,0.07);
+            --glass:          rgba(255,255,255,0.05);
+            --glass-border:   rgba(255,255,255,0.10);
+            --text-primary:   #f0f6ff;
+            --text-secondary: #8b949e;
+            --text-muted:     #484f58;
+            --accent:         #0f62fe;
+            --gradient-1:     linear-gradient(135deg, #0f62fe 0%, #8a3ffc 100%);
+            --gradient-2:     linear-gradient(135deg, #009d9a 0%, #0f62fe 100%);
+            --radius-sm:      8px;
+            --radius-md:      12px;
+            --radius-lg:      20px;
+            --radius-xl:      32px;
+            --shadow-glow:    0 0 40px rgba(15,98,254,0.15);
+            --transition:     all 0.3s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-secondary); }
+        ::-webkit-scrollbar-thumb { background: var(--ibm-blue); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--ibm-blue-light); }
+
+        /* Selection */
+        ::selection { background: rgba(15,98,254,0.3); color: #fff; }
+
+        /* Utility */
+        .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
+    </style>
+
+    {% block extra_styles %}{% endblock %}
+</head>
+<body>
+    {% block body %}{% endblock %}
+
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>
