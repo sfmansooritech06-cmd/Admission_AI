@@ -1,8 +1,19 @@
-# AdmitAI – College Admission AI Agent
+# 🎓 AdmitAI – AI Powered College Admission Agent
 
-> **IBM SkillsBuild AI & Cloud Hackathon Project**
-> An intelligent RAG-based college admission assistant powered by IBM Granite (watsonx.ai), LangChain, FAISS, and Flask.
+> IBM Granite + watsonx.ai + RAG + LangChain + FAISS
 
+An AI-powered multi-college admission assistant that answers student queries using official college admission documents through Retrieval-Augmented Generation (RAG).
+
+## IBM Technologies
+- IBM Granite
+- IBM watsonx.ai
+- IBM Cloud Lite
+
+## AI Technologies
+- LangChain
+- FAISS
+- HuggingFace Embeddings
+- Flask
 ---
 
 ## Table of Contents
