@@ -1,0 +1,30 @@
+{
+  "name": "AdmitAI - College Admission AI Agent",
+  "description": "An AI-powered multi-college admission assistant built using IBM Granite, watsonx.ai, Flask, LangChain, FAISS, and RAG.",
+  "version": "1.0.0",
+  "author": "Sadaf Fatima Mansoori",
+  "license": "MIT",
+  "repository": "https://github.com/sfmansooritech06-cmd/Admission_AI",
+  "technologies": [
+    "Python",
+    "Flask",
+    "IBM Granite",
+    "IBM watsonx.ai",
+    "LangChain",
+    "FAISS",
+    "RAG",
+    "HTML",
+    "CSS",
+    "JavaScript"
+  ],
+  "features": [
+    "Multi-college admission guidance",
+    "AI chatbot",
+    "Course eligibility",
+    "Fee structure lookup",
+    "Hostel information",
+    "Scholarship information",
+    "Placement information",
+    "Document-based question answering"
+  ]
+}
