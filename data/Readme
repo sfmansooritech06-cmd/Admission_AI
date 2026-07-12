@@ -1,0 +1,9 @@
+## Dataset
+
+The project uses official admission brochures and institutional documents from 21 colleges.
+
+Due to GitHub repository size limitations, the dataset is not included in this repository.
+
+To run locally, place the PDF files inside:
+
+data/
