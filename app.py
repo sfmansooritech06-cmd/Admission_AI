@@ -224,10 +224,20 @@ def internal_error(e):
 if __name__ == "__main__":
     debug = os.getenv("FLASK_DEBUG", "False").lower() in ("true", "1")
     port  = int(os.getenv("PORT", 5000))
-    print("\n" + "=" * 50)
+    print("\n" + "=" * 55)
     print("  AdmitAI – College Admission AI Agent")
     print("  IBM SkillsBuild Hackathon Project")
-    print("=" * 50)
+    print("=" * 55)
     print(f"  Running on http://localhost:{port}")
-    print("=" * 50 + "\n")
+    print("=" * 55)
+
+    # Startup validation: load (or auto-rebuild) vector store and print banner.
+    # This ensures new PDFs are indexed before the first request arrives.
+    try:
+        from utils.rag import print_startup_banner
+        print_startup_banner()
+    except Exception as _banner_exc:
+        print(f"  [WARN] Startup validation failed: {_banner_exc}")
+        print("  Run:   python build_db.py --rebuild\n")
+
     app.run(host="0.0.0.0", port=port, debug=debug)
